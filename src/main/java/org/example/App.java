@@ -3,10 +3,12 @@
  *  Copyright 2021 Bryson Paul
  */
 package org.example;
+import java.text.DecimalFormat;
 import java.util.Scanner;
 public class App {
     public static void main( String[] args ) {
         Scanner sc = new Scanner(System.in);
+        DecimalFormat df= new DecimalFormat("0.00");
         Item[] items = new Item[3];
         final float TAXRATE = (float).055;
         float subtotal = 0;
@@ -15,8 +17,8 @@ public class App {
                 subtotal = 0;//needed for if it comes back if they enter a non-numeric
                 for (int x = 0; x < 3; x++) {
                     items[x] = new Item();
-                    items[x].setPrice(Integer.parseInt(strIO("Enter the price of item " + (x + 1) + " ", sc)));
-                    items[x].setQuantity(Integer.parseInt(strIO("Enter the quantity of item " + (x + 1) + " ", sc)));
+                    items[x].setPrice(Integer.parseInt(strIO("Enter the price of item " + (x + 1) + ": ", sc)));
+                    items[x].setQuantity(Integer.parseInt(strIO("Enter the quantity of item " + (x + 1) + ": ", sc)));
                     subtotal += items[x].price * items[x].quantity;
                 }
             } catch (Exception ex) {
@@ -27,9 +29,9 @@ public class App {
         }
         float tax = subtotal*TAXRATE;
         float total= subtotal+tax;
-        System.out.println("Subtotal: $" + subtotal);
-        System.out.println("Tax: $" + tax);
-        System.out.println("Total: $" + total);
+        System.out.println("Subtotal: $" + df.format(subtotal));
+        System.out.println("Tax: $" + df.format(tax));
+        System.out.println("Total: $" + df.format(total));
 
     }
     public static String strIO(String input, Scanner sc){
